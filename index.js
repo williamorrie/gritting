@@ -7,27 +7,7 @@ function initMap() {
     mapTypeId: "terrain",
     zoom: 9,
   });
-
-  // Create a <script> tag and set the USGS URL as the source.
-  const script = document.createElement("script");
-
-  // This example uses a local copy of the GeoJSON stored at
-  // http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_week.geojsonp
-  script.src =
-    "https://developers.google.com/maps/documentation/javascript/examples/json/earthquake_GeoJSONP.js";
-  document.getElementsByTagName("head")[0].appendChild(script);
-}
-
-// Loop through the results array and place a marker for each
-// set of coordinates.
-const eqfeed_callback = function (results) {
-  for (let i = 0; i < results.features.length; i++) {
-    const coords = results.features[i].geometry.coordinates;
-    const latLng = new google.maps.LatLng(coords[1], coords[0]);
-
-    new google.maps.Marker({
-      position: latLng,
-      map: map,
-    });
-  }
+  map.data.loadGeoJson(
+      "https://services1.arcgis.com/i8LHQZrSk9zIffRU/ArcGIS/rest/services/Public_Gritting/FeatureServer/0/query?where=1%3D1&objectIds=&time=&geometry=&geometryType=esriGeometryEnvelope&inSR=&spatialRel=esriSpatialRelIntersects&resultType=none&distance=0.0&units=esriSRUnit_Meter&returnGeodetic=false&outFields=OBJECTID&returnGeometry=true&featureEncoding=esriDefault&multipatchOption=xyFootprint&maxAllowableOffset=&geometryPrecision=&outSR=&datumTransformation=&applyVCSProjection=false&returnIdsOnly=false&returnUniqueIdsOnly=false&returnCountOnly=false&returnExtentOnly=false&returnQueryGeometry=false&returnDistinctValues=false&cacheHint=false&orderByFields=&groupByFieldsForStatistics=&outStatistics=&having=&resultOffset=&resultRecordCount=7000&returnZ=false&returnM=false&returnExceededLimitFeatures=true&quantizationParameters=&sqlFormat=none&f=pgeojson&token="
+      );
 };
